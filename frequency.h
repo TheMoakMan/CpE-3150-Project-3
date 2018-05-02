@@ -22,6 +22,7 @@ struct Note
 	enum Accidental accidential;
 	
 };
+int freq_values[8] = { 440, 493, 523, 587, 659, 698, 784 };
 
 int frequency(char note_name, int octave);
 #endif
