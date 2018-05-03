@@ -1,7 +1,7 @@
 #include "frequency.h"
-int frequency(char note_name, int octave)
+short frequency(char note_name, short octave)
 {
-	int value;
+	short value;
 	
 	
 	value = freq_values[note_name - 65];
