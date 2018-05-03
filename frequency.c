@@ -1,10 +1,11 @@
 #include "frequency.h"
-short frequency(char note_name, short octave)
+short frequency(Note note, short octave)
 {
 	short value;
 	
 	
-	value = freq_values[note_name - 65];
+	value = freq_values[note.name - 65];
+	value = note.accidential;
 	if (octave < 0)
 		value = value / (octave * -1);
 	if (octave > 1)

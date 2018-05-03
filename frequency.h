@@ -2,9 +2,9 @@
 #define __FREQUENCY_H__
 typedef enum 
 {
-	Flat = -1,
-	Natural = 0,
-	Sharp = 1
+	Flat = 0.94,
+	Natural = 1,
+	Sharp = 1.06,
 } Accidental;
 
 typedef enum 
@@ -24,5 +24,5 @@ typedef struct
 } Note;
 short freq_values[] = { 440, 493, 523, 587, 659, 698, 784 };
 
-short frequency(char note_name, short octave);
+short frequency(Note note, short octave);
 #endif
