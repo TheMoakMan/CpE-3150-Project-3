@@ -81,7 +81,7 @@ typedef enum
 	Eighth = 8
 } Rhythm;
 
-typedef struct 
+typedef struct
 {
 	NoteName name;
 	Rhythm value;
