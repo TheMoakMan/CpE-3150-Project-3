@@ -2,7 +2,14 @@
 
 void main(void)
 {
-
+		
+  TMOD = 0x01;  //Timer 0 Mode 1
+  IE = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
+	PCON = 0x00;  //Set SMOD1 = 0, SMOD0 = 0;
+	SCON = 0x50;  //REN = 1, Serial Mode 8-bit Variable UART
+	
+	tempo = 1;
+	
   while(1) 
 	{
 		if(P2^0 == 0)
@@ -31,12 +38,29 @@ void main(void)
 		}
   }  
 }
+void play_song(short index)
+{
+  note_ptr = songs[index];
+	current  = index;
+	
+	update_song();
+}
 
 void wait(bit my_button)
 {
-	while(my_button == 0);
+	while(my_button == 0); 
 }
 
-void TO_ISR(void) interrupt 1
+void update_song(void)
 {
+		
+	
+	
 }
+
+void T0_ISR(void) interrupt 1
+{
+	update_song();
+}
+
+

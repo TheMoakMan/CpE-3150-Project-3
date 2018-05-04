@@ -3,9 +3,11 @@
 #include <reg932.h>
 #include "frequency.h"
 Note * xdata songs[2]; // Pre-recorded songs to be played back
-int lengths[2]; // Number of notes in each pre-recorded song
+short lengths[2]; // Number of notes in each pre-recorded song
 Note * note_ptr; // Current note being played back
-int current; // Current song being played back
+short current; // Current song being played back
+short tempo;    //# Beats per second 
+bit spkr = P1^7; //Pin for the speaker
 
 /*
  * Pauses execution until button is released
@@ -21,11 +23,12 @@ void wait(bit my_button);
  * pre: index must be within bounds of songs array
  * post: Starts timer 0 and initiates playback of a song on the speaker
  */
-void play_song(int index);
+void play_song(short index);
 
 /*
  * Timer 0 interrupt service request handler
+ * called by the Timer 0 Interrupt service routine
  * post: responds to the timer rollover, advances note_ptr, and reloads timer
  */
-void TO_ISR(void);
+void update_song(void);
 #endif
