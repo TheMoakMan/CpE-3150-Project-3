@@ -1,6 +1,9 @@
 #ifndef __FREQUENCY_H__
 #define __FREQUENCY_H__
 
+/*
+ * Mapping of note names, octaves and frequencies
+ */
 typedef enum
 {
 	C0 = 16,
@@ -73,6 +76,11 @@ typedef enum
 	G5 = 784
 } NoteName;
 
+/* 
+ * Rhythmic values for a note
+ * The number represent the dominator of the rhythmic 
+ * value (i.e. 8 => 1/8 => Eighth note
+ */
 typedef enum 
 {
 	Whole = 1,
@@ -81,6 +89,11 @@ typedef enum
 	Eighth = 8
 } Rhythm;
 
+/*
+ * Construct representing a musical note on the staff
+ * name: note name from the NoteName to be converted to a freqency
+ * value: The rhythmic value of the note as defined in the Rhythm enum
+ */
 typedef struct
 {
 	NoteName name;
