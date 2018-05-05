@@ -3,14 +3,24 @@
 void main(void)
 {
 		
-  TMOD = 0x01;  //Timer 0 Mode 1
-  IE = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
+	int delay;
+	delay = 1 / c.name * 1843250; 
+	P1M1 = 0;
+	c.name = A4;
+	c.value = Quarter;
+	TMOD = 0x01;  //Timer 0 Mode 1
+  IEN0 = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
 	PCON = 0x00;  //Set SMOD1 = 0, SMOD0 = 0;
 	SCON = 0x50;  //REN = 1, Serial Mode 8-bit Variable UART
-	
+	TH0 = -delay >> 8;
+	TL0 = -delay;
+	//spkr = P1^7;
 	tempo = 1;
+	tempo = tempo * 4; // Sixteenth notes per second
+	TR0 = 1;
 	
-  while(1) 
+	while(1);
+  /*while(1) 
 	{
 		if(P2^0 == 0)
 		{
@@ -36,7 +46,10 @@ void main(void)
 		{
 			wait(P0^0);
 		}
-  }  
+		
+	
+
+  }  */
 }
 void play_song(short index)
 {
@@ -54,13 +67,33 @@ void wait(bit my_button)
 void update_song(void)
 {
 		
-	
+	current_sixteenth++;
+	if (current_sixteenth > (16 / (* note_ptr).value))
+	{
+		note_ptr++;
+		current_sixteenth = 0;
+	}
+	if (note_ptr == (songs[current] + lengths[current] * sizeof(Note)))
+	{
+		current_sixteenth = 0; // Stop playback
+	}
+	else
+	{
+		;// Reload timer and go again
+	}
 	
 }
 
 void T0_ISR(void) interrupt 1
 {
-	update_song();
+	bit fuckyouall = P1^7;
+	fuckyouall = ~fuckyouall;
+	//spkr = ~spkr;
+	TF0 = 0;
+	TR0 = 1;
+	
 }
+
+
 
 

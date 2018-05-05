@@ -1,14 +1,16 @@
 #ifndef __PROJECT_3_H__
 #define __PROJECT_3_H__
 #include <reg932.h>
+#include "uart.h"
 #include "frequency.h"
-Note * xdata songs[2]; // Pre-recorded songs to be played back
-short lengths[2]; // Number of notes in each pre-recorded song
-Note * note_ptr; // Current note being played back
-short current; // Current song being played back
-short tempo;    //# Beats per second 
-bit spkr = P1^7; //Pin for the speaker
-
+Note * xdata songs[2]; 	// Pre-recorded songs to be played back
+short lengths[2]; 			// Number of notes in each pre-recorded song
+Note * note_ptr; 				// Current note being played back
+short current; 					// Current song being played back
+short tempo;    				// Beats per second 
+sbit spkr = P2^4; 							// Pin for the speaker
+short current_sixteenth;// Current beat of the current note
+Note c;
 /*
  * Pauses execution until button is released
  * my_button - button being queried for active low state
