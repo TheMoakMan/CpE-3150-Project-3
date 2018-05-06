@@ -63,7 +63,8 @@ typedef enum
 	E5 	=  	-2797,
 	F5 	=  	-2640,
 	Gb5 =  	-2490,
-	G5 	=  	-2351
+	G5 	=  	-2351,
+	Z = 0 					// Rest
 } NoteName;
 
 /* 
@@ -90,5 +91,6 @@ typedef struct
 	NoteName name;
 	Rhythm value;
 } Note;
+
 
 #endif

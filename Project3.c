@@ -3,8 +3,48 @@
 void main(void)
 {
 		 
+	Note song1[16];
+	Note song2[15];
+	
+	// Another one bites the dust
+	song1[0].name = A2;
+	song1[0].value = Sixteenth;
+	song1[1].name = G2;
+	song1[1].value = Sixteenth;
+	song1[2].name = E1;
+	song1[2].value = Eighth;
+	song1[3].name = Z;
+	song1[3].value = Eighth;
+	song1[4].name = E1;
+	song1[4].value = Eighth;
+	song1[5].name = Z;
+	song1[5].value = Eighth;
+	song1[6].name = E1;
+	song1[6].value = Eighth;
+	song1[7].name = Z;
+	song1[7].value = Quarter;
+	song1[8].name = E1;
+	song1[8].value = Eighth;
+	song1[9].name = E1;
+	song1[9].value = Eighth;
+	song1[10].name = E1;
+	song1[10].value = Eighth;
+	song1[11].name = E1;
+	song1[11].value = Eighth;
+	song1[12].name = G1;
+	song1[12].value = Eighth;
+	song1[13].name = E1;
+	song1[13].value = Sixteenth;
+	song1[14].name = A1;
+	song1[14].value = Sixteenth;
+	song1[15].name = Z;
+	song1[15].value = Half;
+	
+	songs[0] = song1;
+	lengths[0] = 16;
+	
 	P1M1 = 0;
-	c.name = C1;
+	c.name = C5;
 	c.value = Quarter;
 	TMOD = 0x01;  //Timer 0 Mode 1
   IEN0 = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
@@ -13,6 +53,8 @@ void main(void)
 	tempo = 1;
 	tempo = tempo * 4; // Sixteenth notes per second
 	TF0 = 1;
+	
+
 	
 	while(1);
   /*while(1) 
