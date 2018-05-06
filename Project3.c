@@ -1,7 +1,7 @@
 #include "Project3.h"
 void makeSong(Note song[], NoteName notes[], Rhythm rhyth[], short size);
 
-NoteName songNotes[] = {E4, F4, G4, A3, Bb3};
+NoteName songNotes[] = {A4, F4, G4, A3, Bb3};
 Rhythm songRhyth[] = {Whole, Half, Quarter, Eighth, Sixteenth};
 Note song[5];	 
 
@@ -88,18 +88,19 @@ void update_song(void)
 void T0_ISR(void) interrupt 1
 {
 	static short i = 0;
-	if(i <= 5){
+	if (i == 0) i++;
+	if(i < 5){
   TH0 = song[i].name >> 8;
-	TH0 = song[i].name;
+	TL0 = song[i].name;
 	spkr = ~spkr;
 	TF0 = 0;
 	TR0 = 1;
 	
-  i++;
+  //i++;
   }
 }
 
-void makeSong(Note song[], NoteName notes[], Rhythm rhyth[], short size)
+void makeSong(Note *song, NoteName *notes, Rhythm *rhyth, short size)
 {
 	short i;
 	for(i = 0; i < size; i++)
