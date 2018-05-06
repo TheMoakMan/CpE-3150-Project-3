@@ -6,11 +6,13 @@
 Note * xdata songs[2]; 	// Pre-recorded songs to be played back
 short lengths[2]; 			// Number of notes in each pre-recorded song
 Note * note_ptr; 				// Current note being played back
-short current; 					// Current song being played back
-short tempo;    				// Beats per second 
+short current_song; 		// Current song being played back
+short tempo;    				// Milliseconds per sixteenth note
 sbit spkr = P1^7; 			// Pin for the speaker
-short current_sixteenth;// Current beat of the current note
-Note c;
+short song_pos;					// Position in current song
+Note current_note; 	// Current note being played
+bit keyboard_mode;				// Being used as a keyboard
+
 /*
  * Pauses execution until button is released
  * my_button - button being queried for active low state
@@ -26,11 +28,4 @@ void wait(bit my_button);
  * post: Starts timer 0 and initiates playback of a song on the speaker
  */
 void play_song(short index);
-
-/*
- * Timer 0 interrupt service request handler
- * called by the Timer 0 Interrupt service routine
- * post: responds to the timer rollover, advances note_ptr, and reloads timer
- */
-void update_song(void);
 #endif
