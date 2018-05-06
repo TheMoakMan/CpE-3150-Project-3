@@ -2,22 +2,17 @@
 
 void main(void)
 {
-		
-	int delay;
-	delay = 1 / c.name * 1843250; 
+		 
 	P1M1 = 0;
-	c.name = A4;
+	c.name = C1;
 	c.value = Quarter;
 	TMOD = 0x01;  //Timer 0 Mode 1
   IEN0 = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
 	PCON = 0x00;  //Set SMOD1 = 0, SMOD0 = 0;
 	SCON = 0x50;  //REN = 1, Serial Mode 8-bit Variable UART
-	TH0 = -delay >> 8;
-	TL0 = -delay;
-	//spkr = P1^7;
 	tempo = 1;
 	tempo = tempo * 4; // Sixteenth notes per second
-	TR0 = 1;
+	TF0 = 1;
 	
 	while(1);
   /*while(1) 
@@ -86,9 +81,9 @@ void update_song(void)
 
 void T0_ISR(void) interrupt 1
 {
-	bit fuckyouall = P1^7;
-	fuckyouall = ~fuckyouall;
-	//spkr = ~spkr;
+	TL0 = c.name;
+	TH0 = c.name >> 8;
+	spkr = ~spkr;
 	TF0 = 0;
 	TR0 = 1;
 	

@@ -8,7 +8,7 @@ short lengths[2]; 			// Number of notes in each pre-recorded song
 Note * note_ptr; 				// Current note being played back
 short current; 					// Current song being played back
 short tempo;    				// Beats per second 
-sbit spkr = P2^4; 							// Pin for the speaker
+sbit spkr = P1^7; 			// Pin for the speaker
 short current_sixteenth;// Current beat of the current note
 Note c;
 /*
