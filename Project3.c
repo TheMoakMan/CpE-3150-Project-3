@@ -118,11 +118,11 @@ void T0_ISR(void) interrupt 1
 void T1_ISR(void) interrupt 3
 {
 	static int note_value = 0;
-	if (song_pos < lengths[0])
+	if (song_pos < lengths[current_song])
 	{
 		if (note_value == 0)
 		{
-			current_note = songs[0][song_pos++];
+			current_note = songs[current_song][song_pos++];
 			note_value = (16 / current_note.value) * (tempo);
 		}
 		note_value --;
