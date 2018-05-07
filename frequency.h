@@ -64,6 +64,7 @@ typedef enum
 	F5 	=  	-2640,
 	Gb5 =  	-2490,
 	G5 	=  	-2351,
+	A5 	=		-2094,
 	Z = 0 					// Rest
 } NoteName;
 
@@ -74,11 +75,12 @@ typedef enum
  */
 typedef enum 
 {
-	Whole 		= 1,
-	Half 			= 2,
-	Quarter 	= 4,
-	Eighth		= 8,
-	Sixteenth = 16
+	Whole 							= 1,
+	Half 								= 2,
+	Quarter 						= 4,
+	Eighth							= 8,
+	Sixteenth 					= 16,
+	Dotted_Quarter 			= 17
 } Rhythm;
 
 /*

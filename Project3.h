@@ -13,13 +13,15 @@ short song_pos;					// Position in current song
 Note current_note; 	// Current note being played
 bit keyboard_mode;				// Being used as a keyboard
 
-/*
- * Pauses execution until button is released
- * my_button - button being queried for active low state
- * pre: my_button must map to a bit location of a switch on Simon board
- * post: pauses execution
- */
-void wait(bit my_button);
+sbit sw1 = P2^0;
+sbit sw2 = P0^1;
+sbit sw3 = P2^3;
+sbit sw4 = P0^2;
+sbit sw5 = P1^4;
+sbit sw6 = P0^0;
+sbit sw7 = P2^1;
+sbit sw8 = P0^3;
+sbit sw9 = P2^2;
 
 /*
  * Plays a pre-recorded song
