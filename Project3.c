@@ -2,7 +2,7 @@
 void main(void)
 {
 		 
-	Note xdata song1[16];
+	Note xdata song1[15];
 	Note xdata song2[15];
 	
 	keyboard_mode = 0;
@@ -30,16 +30,14 @@ void main(void)
 	song1[9].value = Eighth;
 	song1[10].name = E2;
 	song1[10].value = Eighth;
-	song1[11].name = E2;
+	song1[11].name = G2;
 	song1[11].value = Eighth;
-	song1[12].name = G2;
-	song1[12].value = Eighth;
-	song1[13].name = E2;
-	song1[13].value = Sixteenth;
-	song1[14].name = A2;
-	song1[14].value = Sixteenth;
-	song1[15].name = Z;
-	song1[15].value = Half;
+	song1[12].name = E2;
+	song1[12].value = Sixteenth;
+	song1[13].name = A2;
+	song1[13].value = Eighth;
+	song1[14].name = Z;
+	song1[14].value = Half;
 	
 	songs[0] = song1;
 	lengths[0] = 16;
@@ -48,7 +46,7 @@ void main(void)
   IEN0 = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
 	PCON = 0x00;  //Set SMOD1 = 0, SMOD0 = 0;
 	SCON = 0x50;  //REN = 1, Serial Mode 8-bit Variable UART
-	//PT1	 = 1;
+	PT1	 = 1;
 	tempo = 125;
 	current_song = 255;
 	P1M1 = 0;
@@ -141,6 +139,7 @@ void T1_ISR(void) interrupt 3
 		current_song = 255; // Stop playback
 		song_pos = 0;
 		note_value = 0;
+		TR1 = 0;
 	}
 }
 
