@@ -4,6 +4,10 @@ void main(void)
 		 
 	Note xdata song1[15];
 	Note xdata song2[34];
+	char songTitle1[28] = {"Another One Bites The Dust\n\r"};		//\n\r goes to beginning of next line
+	char songTitle2[22] = {"Final Jeopardy Theme\n\r"};
+	
+	char k = 0; //counter for for-loop
 	
 	keyboard_mode = 0;
 	
@@ -125,16 +129,26 @@ void main(void)
 	P1M1 = 0;
 	P2M1 = 0;
 	
+	uart_init();
+	
   while(1) 
 	{
 		if (sw1 == 0)
 		{
 			play_song(0);
+			for(k = 0; k < 28; k++)  //loop through title array to display name
+			{
+				uart_transmit(songTitle1[k]);
+			}
 			while(sw1 == 0);
 		}
 		else if (sw2 == 0)
 		{
 			play_song(1);
+			for(k = 0; k < 22; k++) 
+			{
+				uart_transmit(songTitle2[k]);
+			}
 			while(sw2 == 0);
 		}
 		else if (sw3 == 0)
@@ -230,7 +244,7 @@ void T1_ISR(void) interrupt 3
 	}
 }
 
-display(char letter) 
+void display(char letter) 
 {
 	switch (letter)
 	{
@@ -269,17 +283,41 @@ display(char letter)
 			segE = 0;
 			segF = 1;
 			segG = 0;
-			
-
-
-
-
-
-
-
-
-
-
-
-
-
+			break;
+		case 'E':
+			segA = 0;
+			segB = 1;
+			segC = 1;
+			segD = 0;
+			segE = 0;
+			segF = 1;
+			segG = 0;
+			break;
+		case 'F':
+			segA = 0;
+			segB = 1;
+			segC = 1;
+			segD = 1;
+			segE = 0;
+			segF = 1;
+			segG = 0;
+			break;
+		case 'G':
+			segA = 0;
+			segB = 0;
+			segC = 0;
+			segD = 0;
+			segE = 1;
+			segF = 0;
+			segG = 0;
+			break;
+		default:
+			segA = 1;
+			segB = 1;
+			segC = 1;
+			segD = 1;
+			segE = 1;
+			segF = 1;
+			segG = 1;
+	}
+}

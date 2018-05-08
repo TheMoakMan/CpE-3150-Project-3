@@ -92,6 +92,7 @@ typedef struct
 {
 	NoteName name;
 	Rhythm value;
+	char letter;
 } Note;
 
 

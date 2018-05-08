@@ -88,6 +88,7 @@ void uart_isr
 {
   if (RI)
   {
+		unsigned char input = uart_get();
     // clear interrupt flag
     RI = 0;
   } // if
