@@ -117,6 +117,9 @@
         <tRSysVw>1</tRSysVw>
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
+        <bEvRecOn>1</bEvRecOn>
+        <bSchkAxf>0</bSchkAxf>
+        <bTchkAxf>0</bTchkAxf>
         <nTsel>-1</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
@@ -137,7 +140,24 @@
           <Name>(98=-1,-1,-1,-1,0)(3003=-1,-1,-1,-1,0)(3004=240,202,463,394,0)(3006=-1,-1,-1,-1,0)(5019=-1,-1,-1,-1,0)(5028=-1,-1,-1,-1,0)(91=-1,-1,-1,-1,0)(92=-1,-1,-1,-1,0)(5092=-1,-1,-1,-1,0)(5091=-1,-1,-1,-1,0)(5007=-1,-1,-1,-1,0)(5090=-1,-1,-1,-1,0)(5015=-1,-1,-1,-1,0)(3007=-1,-1,-1,-1,0)(5029=-1,-1,-1,-1,0)(5097=-1,-1,-1,-1,0)(2003=-1,-1,-1,-1,0)(5006=-1,-1,-1,-1,0)(5004=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>28</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>C:\Users\jaden\Desktop\CpE3150Project3\frequency.h</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+      </Breakpoint>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -170,9 +190,16 @@
       <LintExecutable></LintExecutable>
       <LintConfigFile></LintConfigFile>
       <bLintAuto>0</bLintAuto>
-      <Lin2Executable></Lin2Executable>
-      <Lin2ConfigFile></Lin2ConfigFile>
-      <bLin2Auto>0</bLin2Auto>
+      <bAutoGenD>0</bAutoGenD>
+      <LntExFlags>0</LntExFlags>
+      <pMisraName></pMisraName>
+      <pszMrule></pszMrule>
+      <pSingCmds></pSingCmds>
+      <pMultCmds></pMultCmds>
+      <pMisraNamep></pMisraNamep>
+      <pszMrulep></pszMrulep>
+      <pSingCmdsp></pSingCmdsp>
+      <pMultCmdsp></pMultCmdsp>
       <LogicAnalyzers>
         <Wi>
           <IntNumber>0</IntNumber>

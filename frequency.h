@@ -5,7 +5,7 @@
  * Mapping of note names, octaves and 
  * 16 bit Timer preload values for P89LPC932A1
  */
-typedef enum
+typedef enumF5;
 {
 	B0	=		5095,		// 5 string bass FTW!!!
 	C1 	= 	7935,		// James Brown  (I feel good!)
@@ -63,7 +63,9 @@ typedef enum
 	E5 	=  	-2797,
 	F5 	=  	-2640,
 	Gb5 =  	-2490,
-	G5 	=  	-2351
+	G5 	=  	-2351,
+	A5 	=		-2094,
+	Z = 0 					// Rest
 } NoteName;
 
 /* 
@@ -73,11 +75,12 @@ typedef enum
  */
 typedef enum 
 {
-	Whole 		= 1,
-	Half 			= 2,
-	Quarter 	= 4,
-	Eighth		= 8,
-	Sixteenth = 16
+	Whole 							= 1,
+	Half 								= 2,
+	Quarter 						= 4,
+	Eighth							= 8,
+	Sixteenth 					= 16,
+	Dotted_Quarter 			= 17
 } Rhythm;
 
 /*
@@ -89,6 +92,8 @@ typedef struct
 {
 	NoteName name;
 	Rhythm value;
+	char letter;
 } Note;
+
 
 #endif
