@@ -176,6 +176,12 @@ void main(void)
 	P0M1 = 0;
 	P1M1 = 0;
 	P2M1 = 0;
+	/*uart_transmit('t');
+			uart_transmit('e');
+			uart_transmit('s');
+			uart_transmit('t');
+			uart_transmit('\n');
+			uart_transmit('\r'); */
 		
   while(1) 
 	{
@@ -370,26 +376,24 @@ void songMode()
 		if(sw1 == 0)
 			return;
 		else if(sw2 == 0){
+			for(k = 0; k < 28; k++)  //loop through title array to display name
+			{
+				uart_transmit(songTitle1[k]);
+			}
 			play_song(0);
 			
-			uart_transmit('t');
-			uart_transmit('e');
-			uart_transmit('s');
-			uart_transmit('t');
-			
-			//for(k = 0; k < 28; k++)  //loop through title array to display name
-			//{
-			//	uart_transmit(songTitle1[k]);
-			//}
+
+
 			led1 = 1;
 			while(sw2 == 0);
 		}
 		else if(sw3 == 0){
-			play_song(1);
 			for(k = 0; k < 22; k++) 
 			{
 				uart_transmit(songTitle2[k]);
 			}
+			play_song(1);
+
 			while(sw3 == 0);
 		}
   }
