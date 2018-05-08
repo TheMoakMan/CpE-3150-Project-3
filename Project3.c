@@ -260,7 +260,16 @@ display(char letter)
 			segD = 0;
 			segA = 0;
 			segB = 1;
+			break;
 		case 'D':
+			segA = 1;
+			segB = 0;
+			segC = 0;
+			segD = 0;
+			segE = 0;
+			segF = 1;
+			segG = 0;
+			
 
 
 
