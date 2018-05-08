@@ -6,9 +6,9 @@ void main(void)
 	Note xdata song2[34];
 	char songTitle1[28] = {"Another One Bites The Dust\n\r"};		//\n\r goes to beginning of next line
 	char songTitle2[22] = {"Final Jeopardy Theme\n\r"};
-	keys[0] = A5;
-	keys[1] = G5;
-	keys[2] = F5;
+	keys[0] = A4;
+	keys[1] = G4;
+	keys[2] = F4;
 	
 	char k = 0; //counter for for-loop
 	
@@ -362,6 +362,51 @@ void display(char letter)
 			segF = 0;
 			segG = 1;
 			break;
+		case 1
+			segA = 1;
+			segB = 0;
+			segC = 0;
+			segD = 1;
+			segE = 1;
+			segF = 1;
+			segG = 1;
+			break;
+		case 2
+			segA = 0;
+			segB = 0;
+			segC = 1;
+			segD = 0;
+			segE = 0;
+			segF = 1;
+			segG = 0;
+			break;
+		case 3
+			segA = 0;
+			segB = 0;
+			segC = 0;
+			segD = 0;
+			segE = 1;
+			segF = 1;
+			segG = 0;
+			break;
+	  case 4
+			segA = 1;
+			segB = 0;
+			segC = 0;
+			segD = 1;
+			segE = 1;
+			segF = 0;
+			segG = 0;
+			break;
+		case 5
+			segA = 0;
+			segB = 1;
+			segC = 0;
+			segD = 0;
+			segE = 1;
+			segF = 0;
+			segG = 0;
+			break;
 		default:
 			segA = 1;
 			segB = 1;
@@ -406,10 +451,9 @@ void songMode()
 
 void keyboardMode()
 {
-	led2 = led3 = 1;
+	led2 = 1;
 	led4 = led5 = led6 = 0;
 	keyboard_mode = 1;
-  //Create function to set notes for keyboard.	
   while(1)
 	{
 		if(sw1 == 0){
@@ -417,7 +461,7 @@ void keyboardMode()
 		  keyboard_mode = 0;
 		}	
 		else if(sw3 == 0){
-      //keybind();	
+      keybind();	
 		}
 		
 		else if(sw7 == 0){
@@ -437,11 +481,76 @@ void keyboardMode()
 		}
 		
 	}
+}
+
+void keyBind()
+{	
+	//Select Which Key to bind to. 
+	if(sw1 == 0)
+		return;
+	else if(sw7 == 0){
+	  keys[0] = noteSelect();	
+	}
+	else if(sw8 == 0){
+		keys[1] = noteSelect();
+	}
+  else if(sw9 == 0){
+		keys[2] = noteSelect();
+	}		
 	
+}
+
+NoteName noteSelect()
+{
+	led7 = 1;
+	led8 = 1;
+	led9 = 1;
 	
+	NoteName temp;
+	char octave = 0;
+	char i = 0;
 	
+	//Select Note
+	while(1){
+		led3 = led6 = 0;
+		if(sw1 == 0){
+			octave = get_octave();
+			temp = octave_keys[octave][i];
+			return temp;
+		}
+		else if(sw3 == 0){
+       i++;	
+		}
+		else if(sw6 == 0){
+       i--;
+		}			
+		
+		if(i > 7 || i < 0)
+			i = 0;
+		display(noteDisplays[i]);
+	}
 	
+}
+
+char get_octave()
+{
+	led3 = led6 = 1;
 	
+	char i = 0;
 	
+	//Select octave;
+	while(1){
+		led2 = led5 = 0;
+		if(sw1 == 0)
+			return i;
+		else if(sw4 == 0)
+			i++;
+		else if(sw 5 == 0)
+			i--;
+		
+		if(i > 5 || i < 0)
+			i = 0;
+		display(i);
+	}
 	
 }
