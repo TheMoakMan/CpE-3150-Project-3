@@ -31,15 +31,15 @@ sbit sw6 = P0^0;
 sbit sw7 = P2^1;
 sbit sw8 = P0^3;
 sbit sw9 = P2^2;
-sbit led1 =
-sbit led2 =
-sbit led3 =
-sbit led4 =
-sbit led5 = 
-sbit led6 =
-sbit led7 =
-sbit led8 =
-sbit led9 =
+sbit led1 = P2^4;
+sbit led2 = P0^5;
+sbit led3 = P2^7;
+sbit led4 = P0^6;
+sbit led5 = P1^6;
+sbit led6 = P0^4;
+sbit led7 = P2^5;
+sbit led8 = P0^7;
+sbit led9 = P2^6;
 
 
 //seven segment display
@@ -73,6 +73,8 @@ void display(char letter);
  *
  */
 void songMode();
+
+void keyboardMode();
 
 void keyBind();
 

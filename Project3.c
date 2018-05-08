@@ -6,11 +6,10 @@ void main(void)
 	Note xdata song2[34];
 	char songTitle1[28] = {"Another One Bites The Dust\n\r"};		//\n\r goes to beginning of next line
 	char songTitle2[22] = {"Final Jeopardy Theme\n\r"};
+	
 	keys[0] = A4;
 	keys[1] = G4;
 	keys[2] = F4;
-	
-	char k = 0; //counter for for-loop
 	
 	keyboard_mode = 0;
 	
@@ -362,7 +361,7 @@ void display(char letter)
 			segF = 0;
 			segG = 1;
 			break;
-		case 1
+		case 1:
 			segA = 1;
 			segB = 0;
 			segC = 0;
@@ -371,7 +370,7 @@ void display(char letter)
 			segF = 1;
 			segG = 1;
 			break;
-		case 2
+		case 2:
 			segA = 0;
 			segB = 0;
 			segC = 1;
@@ -380,7 +379,7 @@ void display(char letter)
 			segF = 1;
 			segG = 0;
 			break;
-		case 3
+		case 3:
 			segA = 0;
 			segB = 0;
 			segC = 0;
@@ -389,7 +388,7 @@ void display(char letter)
 			segF = 1;
 			segG = 0;
 			break;
-	  case 4
+	  case 4:
 			segA = 1;
 			segB = 0;
 			segC = 0;
@@ -398,7 +397,7 @@ void display(char letter)
 			segF = 0;
 			segG = 0;
 			break;
-		case 5
+		case 5:
 			segA = 0;
 			segB = 1;
 			segC = 0;
@@ -421,6 +420,7 @@ void display(char letter)
 
 void songMode()
 {
+	char k = 0;
 	led2 = 0;
 	led3 = 0;
 	led4 = 1;
@@ -432,18 +432,10 @@ void songMode()
 		}
 		else if(sw2 == 0){
 			play_song(0);
-			for(k = 0; k < 28; k++)  //loop through title array to display name
-			{
-				uart_transmit(songTitle1[k]);
-			}
-			while(sw2 == 0);
+	    while(sw2 == 0);
 		}
 		else if(sw3 = 0){
 			play_song(1);
-			for(k = 0; k < 22; k++) 
-			{
-				uart_transmit(songTitle2[k]);
-			}
 			while(sw3 == 0);
 		}
   }
@@ -502,13 +494,13 @@ void keyBind()
 
 NoteName noteSelect()
 {
-	led7 = 1;
-	led8 = 1;
-	led9 = 1;
-	
 	NoteName temp;
 	char octave = 0;
 	char i = 0;
+	
+	led7 = 1;
+	led8 = 1;
+	led9 = 1;
 	
 	//Select Note
 	while(1){
@@ -534,9 +526,8 @@ NoteName noteSelect()
 
 char get_octave()
 {
-	led3 = led6 = 1;
-	
 	char i = 0;
+	led3 = led6 = 1;
 	
 	//Select octave;
 	while(1){
@@ -545,7 +536,7 @@ char get_octave()
 			return i;
 		else if(sw4 == 0)
 			i++;
-		else if(sw 5 == 0)
+		else if(sw5 == 0)
 			i--;
 		
 		if(i > 5 || i < 0)
