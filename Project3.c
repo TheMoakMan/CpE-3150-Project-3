@@ -376,10 +376,7 @@ void songMode()
 		if(sw1 == 0)
 			return;
 		else if(sw2 == 0){
-			for(k = 0; k < 28; k++)  //loop through title array to display name
-			{
-				uart_transmit(songTitle1[k]);
-			}
+			transmit(songTitle1);
 			play_song(0);
 			
 
@@ -388,13 +385,22 @@ void songMode()
 			while(sw2 == 0);
 		}
 		else if(sw3 == 0){
-			for(k = 0; k < 22; k++) 
-			{
-				uart_transmit(songTitle2[k]);
-			}
+			transmit(songTitle2);
 			play_song(1);
 
 			while(sw3 == 0);
 		}
   }
 }
+
+void transmit(char * st)
+{
+	short x = 0;
+	while (st[x] != '\0')
+	//for(k = 0; k < 28; k++)  //loop through title array to display name
+	{
+		uart_transmit(st[x]);
+		x++;	
+	}
+}
+	

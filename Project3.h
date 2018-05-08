@@ -62,4 +62,10 @@ void display(char letter);
  *
  */
 void songMode();
+/*
+ * Transmits a string over the serial port
+ * pre: st - character array to be transmitted
+ * post: Sends string to serial port
+  */
+void transmit(char * st);
 #endif
