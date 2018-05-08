@@ -23,6 +23,15 @@ sbit sw7 = P2^1;
 sbit sw8 = P0^3;
 sbit sw9 = P2^2;
 
+//seven segment display
+sbit segA = P1^0;
+sbit segB = P1^1;
+sbit segC = P1^2;
+sbit segD = P1^3;
+sbit segE = P2^1;
+sbit segF = P0^3;
+sbit sebG = P2^2;
+sbit DP = P1^5;
 /*
  * Plays a pre-recorded song
  * index - index of song to be played
