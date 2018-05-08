@@ -6,19 +6,34 @@
 Note * xdata songs[2]; 	// Pre-recorded songs to be played back
 short lengths[2]; 			// Number of notes in each pre-recorded song
 Note * note_ptr; 				// Current note being played back
-short current; 					// Current song being played back
-short tempo;    				// Beats per second 
+short current_song; 		// Current song being played back
+short tempo;    				// Milliseconds per sixteenth note
 sbit spkr = P1^7; 			// Pin for the speaker
-short current_sixteenth;// Current beat of the current note
-Note c;
-/*
- * Pauses execution until button is released
- * my_button - button being queried for active low state
- * pre: my_button must map to a bit location of a switch on Simon board
- * post: pauses execution
- */
-void wait(bit my_button);
+short song_pos;					// Position in current song
+Note current_note; 	// Current note being played
+bit keyboard_mode;				// Being used as a keyboard
+NoteName key_note;       //Current note being played by the keyboard
+NoteName keys[3];       //All notes bound to the keyboard.
 
+sbit sw1 = P2^0;
+sbit sw2 = P0^1;
+sbit sw3 = P2^3;
+sbit sw4 = P0^2;
+sbit sw5 = P1^4;
+sbit sw6 = P0^0;
+sbit sw7 = P2^1;
+sbit sw8 = P0^3;
+sbit sw9 = P2^2;
+
+//seven segment display
+sbit segA = P1^0;
+sbit segB = P1^4;
+sbit segC = P1^2;
+sbit segD = P1^3;
+sbit segE = P2^1;
+sbit segF = P0^3;
+sbit segG = P2^2;
+sbit DP = P1^5;
 /*
  * Plays a pre-recorded song
  * index - index of song to be played
@@ -28,9 +43,17 @@ void wait(bit my_button);
 void play_song(short index);
 
 /*
- * Timer 0 interrupt service request handler
- * called by the Timer 0 Interrupt service routine
- * post: responds to the timer rollover, advances note_ptr, and reloads timer
+ * Displays a letter to the 7 segment display
+ * pre: letter must be between A and G
+ * post: Writes the letter to the 7 segment display by sending 0 to the pins
  */
-void update_song(void);
+void display(char letter);
+
+
+/*
+ * Changes the button inputs to play songs coded into memory.
+ *
+ *
+ */
+void songMode();
 #endif
