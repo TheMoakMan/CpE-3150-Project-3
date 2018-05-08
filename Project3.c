@@ -183,10 +183,12 @@ void main(void)
 			uart_transmit('\n');
 			uart_transmit('\r'); */
 		
-  while(1) 
+  transmit("iTunes 8051!\n\r");
+	while(1) 
 	{
 		if (sw1 == 0)
 		{
+			while(sw1 == 0);
 			songMode();
 		}
 		else if (sw2 == 0)
@@ -372,16 +374,13 @@ void songMode()
 	char songTitle1[] = "Another One Bites The Dust\n\r";
 	char songTitle2[] = "Final Jeopardy Theme\n\r";
 	
+	transmit("Song Mode Activated\n\r");
 	while(1){
 		if(sw1 == 0)
 			return;
 		else if(sw2 == 0){
 			transmit(songTitle1);
-			play_song(0);
-			
-
-
-			led1 = 1;
+			play_song(0);			
 			while(sw2 == 0);
 		}
 		else if(sw3 == 0){
@@ -396,8 +395,7 @@ void songMode()
 void transmit(char * st)
 {
 	short x = 0;
-	while (st[x] != '\0')
-	//for(k = 0; k < 28; k++)  //loop through title array to display name
+	while (st[x] != '\0') // Keep sending characters until we hit null terminator
 	{
 		uart_transmit(st[x]);
 		x++;	
