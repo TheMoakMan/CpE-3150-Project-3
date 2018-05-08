@@ -25,7 +25,7 @@ sbit sw9 = P2^2;
 
 //seven segment display
 sbit segA = P1^0;
-sbit segB = P1^1;
+sbit segB = P1^4;
 sbit segC = P1^2;
 sbit segD = P1^3;
 sbit segE = P2^1;
