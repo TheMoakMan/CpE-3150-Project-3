@@ -5,7 +5,7 @@
  * Mapping of note names, octaves and 
  * 16 bit Timer preload values for P89LPC932A1
  */
-typedef enumF5;
+typedef enum
 {
 	B0	=		5095,		// 5 string bass FTW!!!
 	C1 	= 	7935,		// James Brown  (I feel good!)
