@@ -4,10 +4,10 @@ void main(void)
 		 
 	Note xdata song1[15];
 	Note xdata song2[34];
-	char songTitle1[28] = {"Another One Bites The Dust\n\r"};		//\n\r goes to beginning of next line
-	char songTitle2[22] = {"Final Jeopardy Theme\n\r"};
 	
-	char k = 0; //counter for for-loop
+	uart_init();
+
+	
 	
 	keyboard_mode = 0;
 	
@@ -176,9 +176,7 @@ void main(void)
 	P0M1 = 0;
 	P1M1 = 0;
 	P2M1 = 0;
-	
-	uart_init();
-	
+		
   while(1) 
 	{
 		if (sw1 == 0)
@@ -365,24 +363,34 @@ void display(char letter)
 
 void songMode()
 {
+	char songTitle1[] = "Another One Bites The Dust\n\r";
+	char songTitle2[] = "Final Jeopardy Theme\n\r";
+	
 	while(1){
 		if(sw1 == 0)
 			return;
 		else if(sw2 == 0){
 			play_song(0);
-			for(k = 0; k < 28; k++)  //loop through title array to display name
-			{
-				uart_transmit(songTitle1[k]);
-			}
-			while(sw1 == 0);
+			
+			uart_transmit('t');
+			uart_transmit('e');
+			uart_transmit('s');
+			uart_transmit('t');
+			
+			//for(k = 0; k < 28; k++)  //loop through title array to display name
+			//{
+			//	uart_transmit(songTitle1[k]);
+			//}
+			led1 = 1;
+			while(sw2 == 0);
 		}
-		else if(sw3 = 0){
+		else if(sw3 == 0){
 			play_song(1);
 			for(k = 0; k < 22; k++) 
 			{
 				uart_transmit(songTitle2[k]);
 			}
-			while(sw2 == 0);
+			while(sw3 == 0);
 		}
   }
 }

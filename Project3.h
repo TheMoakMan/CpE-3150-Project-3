@@ -22,6 +22,7 @@ sbit sw6 = P0^0;
 sbit sw7 = P2^1;
 sbit sw8 = P0^3;
 sbit sw9 = P2^2;
+sbit led1 = P2^4;
 
 //seven segment display
 sbit segA = P1^0;
@@ -32,6 +33,13 @@ sbit segE = P2^1;
 sbit segF = P0^3;
 sbit segG = P2^2;
 sbit DP = P1^5;
+
+//char xdata songTitle1[28];		//\n\r goes to beginning of next line
+//char xdata songTitle2[22];
+
+int k = 0;
+
+
 /*
  * Plays a pre-recorded song
  * index - index of song to be played
