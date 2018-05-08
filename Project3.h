@@ -30,4 +30,11 @@ sbit sw9 = P2^2;
  * post: Starts timer 0 and initiates playback of a song on the speaker
  */
 void play_song(short index);
+
+/*
+ * Displays a letter to the 7 segment display
+ * pre: letter must be between A and G
+ * post: Writes the letter to the 7 segment display by sending 0 to the pins
+ */
+void display(char letter);
 #endif

@@ -230,6 +230,38 @@ void T1_ISR(void) interrupt 3
 	}
 }
 
+display(char letter) 
+{
+	switch (letter)
+	{
+		case 'A':
+			segE = 0;
+			segF = 0;
+			segA = 0;
+			segB = 0;
+			segC = 0;
+			segG = 0;
+			segD = 1;
+			break;
+		case 'B':
+			segE = 0;
+			segF = 0;
+			segC = 0;
+			segG = 0;
+			segD = 0;
+			segA = 1;
+			segB = 1;
+			break;
+		case 'C':
+			segE = 0;
+			segF = 0;
+			segC = 1;
+			segG = 0;
+			segD = 0;
+			segA = 0;
+			segB = 1;
+		case 'D':
+
 
 
 
