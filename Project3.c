@@ -183,24 +183,15 @@ void main(void)
 	{
 		if (sw1 == 0)
 		{
-			play_song(0);
-			for(k = 0; k < 28; k++)  //loop through title array to display name
-			{
-				uart_transmit(songTitle1[k]);
-			}
-			while(sw1 == 0);
+			songMode();
 		}
 		else if (sw2 == 0)
 		{
-			play_song(1);
-			for(k = 0; k < 22; k++) 
-			{
-				uart_transmit(songTitle2[k]);
-			}
-			while(sw2 == 0);
+			//keyboardMode();
 		}
 		else if (sw3 == 0)
 		{
+			//recordMode();
 			display('A');
 			while(sw3 == 0);
 		}
@@ -369,4 +360,29 @@ void display(char letter)
 			segF = 1;
 			segG = 1;
 	}
+}
+
+
+void songMode()
+{
+	while(1){
+		if(sw1 == 0)
+			return;
+		else if(sw2 == 0){
+			play_song(0);
+			for(k = 0; k < 28; k++)  //loop through title array to display name
+			{
+				uart_transmit(songTitle1[k]);
+			}
+			while(sw1 == 0);
+		}
+		else if(sw3 = 0){
+			play_song(1);
+			for(k = 0; k < 22; k++) 
+			{
+				uart_transmit(songTitle2[k]);
+			}
+			while(sw2 == 0);
+		}
+  }
 }

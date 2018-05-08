@@ -46,4 +46,12 @@ void play_song(short index);
  * post: Writes the letter to the 7 segment display by sending 0 to the pins
  */
 void display(char letter);
+
+
+/*
+ * Changes the button inputs to play songs coded into memory.
+ *
+ *
+ */
+void songMode();
 #endif
