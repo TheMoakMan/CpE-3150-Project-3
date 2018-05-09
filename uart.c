@@ -15,10 +15,16 @@ GENERATED: On "Jun 24 2003" at "10:17:56" by Code Architect 2.01
 
 // SFR description needs to be included
 #include <reg932.h>
+#include "frequency.h"
 #include "uart.h"
 
+extern short * lengths;
+extern NoteName ** octave_keys;
+extern Note * song3;
 // flag that indicates if the UART is busy transmitting or not
 static bit mtxbusy;
+extern void transmit(char * st);
+
 
 /***********************************************************************
 DESC:    Initializes UART for mode 1
@@ -89,8 +95,13 @@ void uart_isr
   if (RI)
   {
 		unsigned char input = uart_get();
-    // clear interrupt flag
+		//transmit(&input);
+       // Parse(input);
+        
+
+   // clear interrupt flag
     RI = 0;
+	     //Parse(input);
   } // if
 
   if (TI)
@@ -132,3 +143,35 @@ unsigned char uart_get
   return SBUF;
 } // uart_get
 
+
+void Parse(char my_input)
+{
+  static char called = 0;
+  static char n_name, n_oct, n_rhyth;
+
+  if(lengths[2] == (25)){
+    transmit("Maximum Song Size Reached");
+    return;
+  }
+  
+  if(called == 0 && my_input >=  '1' && my_input <= '7'){
+    n_name = my_input - '0';
+	called++;
+  } 
+  else if(called == 1 && my_input >= '1' && my_input <= '5'){
+    n_oct = my_input - '0';
+	called++;
+  }
+  else if(called ==  2 && (my_input == '0'  || my_input == '4' || my_input == '8')){
+    n_rhyth = my_input - '0';
+	if(lengths[2] == 1)
+	  transmit("H");
+    
+	//Build a note from the inputs
+	lengths[2]++;
+    song3[lengths[2]-1].name = octave_keys[n_oct-1][n_name-1];
+	song3[lengths[2]-1].value = n_rhyth; 
+
+	called = 0;
+  }
+}

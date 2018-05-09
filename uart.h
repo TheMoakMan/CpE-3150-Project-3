@@ -55,4 +55,7 @@ extern void uart_init
   void
   );
 
+void Parse(char my_input);
+
+
 #endif // _UARTH_

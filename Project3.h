@@ -3,8 +3,8 @@
 #include <reg932.h>
 #include "uart.h"
 #include "frequency.h"
-Note * xdata songs[2]; 	// Pre-recorded songs to be played back
-short lengths[2]; 			// Number of notes in each pre-recorded song
+Note * xdata songs[3]; 	// Pre-recorded songs to be played back
+short lengths[3] = {0, 0, 0}; 			// Number of notes in each pre-recorded song
 Note * note_ptr; 				// Current note being played back
 short current_song; 		// Current song being played back
 short tempo;    				// Milliseconds per sixteenth note
@@ -22,6 +22,8 @@ NoteName octave_keys[5][7] = { {C1, D1, E1, F01, G1, A1, B1},
 															 {C5, D5, E5, F5, G5, A5, B5}};
 char noteDisplays[7] = {'C', 'D', 'E', 'F', 'G', 'A', 'B' };
 char numDisplays[5] = {'1', '2', '3', '4', '5'};
+
+Note xdata song3[25];
 
 sbit sw1 = P2^0;
 sbit sw2 = P0^1;
@@ -90,6 +92,8 @@ NoteName noteSelect();
 
 char get_octave();
 
-void change_tempo(void);
+void change_tempo(void); 
+
+void recordMode();
 
 #endif

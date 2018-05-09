@@ -1,67 +1,20 @@
-#include "Project3.h"
+#include "Project3.h"	    
+
 void main(void)
 {
 		 
 	Note xdata song1[15];
 	Note xdata song2[34];
-	
+
 	uart_init();
 
+	songs[2] = song3;
 		
 	keyboard_mode = 0;
-	
-	// Another one bites the dust
-	song1[0].name = A3;
-	song1[0].value = Sixteenth;
-	song1[0].letter = 'A';
-	song1[1].name = G3;
-	song1[1].value = Sixteenth;
-	song1[1].letter = 'G';
-	song1[2].name = E2;
-	song1[2].value = Eighth;
-	song1[2].letter = 'E';
-	song1[3].name = Z;
-	song1[3].value = Eighth;
-	song1[3].letter = 'Z';
-	song1[4].name = E2;
-	song1[4].value = Eighth;
-	song1[4].letter = 'E';
-	song1[5].name = Z;
-	song1[5].value = Eighth;
-	song1[5].letter = 'Z';
-	song1[6].name = E2;
-	song1[6].value = Eighth;
-	song1[6].letter = 'E';
-	song1[7].name = Z;
-	song1[7].value = Quarter;
-	song1[7].letter = 'Z';
-	song1[8].name = E2;
-	song1[8].value = Eighth;
-	song1[8].letter = 'E';
-	song1[9].name = E2;
-	song1[9].value = Eighth;
-	song1[9].letter = 'E';
-	song1[10].name = E2;
-	song1[10].value = Eighth;
-	song1[10].letter = 'E';
-	song1[11].name = G2;
-	song1[11].value = Eighth;
-	song1[11].letter = 'G';
-	song1[12].name = E2;
-	song1[12].value = Sixteenth;
-	song1[12].letter = 'E';
-	song1[13].name = A2;
-	song1[13].value = Eighth;
-	song1[13].letter = 'A';
-	song1[14].name = Z;
-	song1[14].value = Half;
-	song1[14].letter = 'Z';
-	
+		
 	keys[0] = A4;
 	keys[1] = G4;
 	keys[2] = F4;
-	
-	keyboard_mode = 0;
 	
 	// Another one bites the dust
 	song1[0].name = A3;
@@ -221,7 +174,7 @@ void main(void)
 	TMOD = 0x11;  //Timer 0 Mode 1
   IEN0 = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
 	PCON = 0x00;  //Set SMOD1 = 0, SMOD0 = 0;
-	SCON = 0x50;  //REN = 1, Serial Mode 8-bit Variable UART
+	SCON = 0x40;  //REN = 0, Serial Mode 8-bit Variable UART
 	PT1	 = 1;
 	tempo = 125;
 	current_song = 255;
@@ -247,8 +200,7 @@ void main(void)
 		}
 		else if (sw7 == 0)
 		{
-			//recordMode();
-			display('A');
+			recordMode();
 			while(sw3 == 0);
 		}
   }
@@ -306,7 +258,7 @@ void songMode()
 	while(1){
         led2 = led3 = led6 = 0;
 		if(sw1 == 0){
-		    led2 = led3 = 1;
+		    led2 = led3 = led6 = 1;
 			while(sw1 == 0);
 			return;
 		}
@@ -646,4 +598,33 @@ char get_octave()
 		display(numDisplays[i]);
 	}
 	
+} 
+
+void recordMode()
+{
+	led4 = led7 =1;
+	REN = 1;
+	transmit("Enter a song in the format of <Note> <Octave> <Tempo> as integers\n\r");
+	transmit("Note Map: 1=C, 2=D, 3=E, 4=F, 5=G, 6=A, 7=B\n\r");  
+	transmit("Octaves are 1-5\n\rTempos: 1=Whole, 4=Quarter, 8=Eighth\n\r");
+    
+	while(1){
+	  led3 = 0;
+	  if(sw1 == 0){
+        while(sw1 ==0);
+	    REN = 0;
+		led3 = 1;
+	    return;
+	  }
+      if(sw3 == 0){
+        play_song(2);
+		transmit("Custom song\n\r");
+		while(sw3 == 0);
+	  }
+
+	}
+	
 }
+
+
+
