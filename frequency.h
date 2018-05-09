@@ -7,7 +7,7 @@
  */
 typedef enum
 {
-	B0	=		5095,		// 5 string bass FTW!!!
+	B0	=	5095,		// 5 string bass FTW!!!
 	C1 	= 	7935,		// James Brown  (I feel good!)
 	Db1 =  	11323,	// Laying it down
 	D1 	= 	14335,	// Dirty grooves
@@ -76,12 +76,12 @@ typedef enum
  */
 typedef enum 
 {
-	Whole 							= 1,
-	Half 								= 2,
-	Quarter 						= 4,
-	Eighth							= 8,
-	Sixteenth 					= 16,
-	Dotted_Quarter 			= 17
+	Whole = 1,
+	Half = 2,
+	Quarter = 4,
+	Eighth = 8,
+	Sixteenth = 16,
+	Dotted_Quarter = 17
 } Rhythm;
 
 /*

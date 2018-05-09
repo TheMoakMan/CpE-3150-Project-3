@@ -17,6 +17,8 @@ GENERATED: On "Jun 24 2003" at "10:17:56" by Code Architect 2.01
 #include <reg932.h>
 #include "uart.h"
 
+sbit led5 = P1^6;
+
 // flag that indicates if the UART is busy transmitting or not
 static bit mtxbusy;
 
@@ -86,9 +88,16 @@ void uart_isr
   void
   ) interrupt 4 using 1
 {
+int i = 0;
   if (RI)
   {
-		unsigned char input = uart_get();
+	unsigned char input = uart_get();
+	if(input == 'c')
+	{
+		led5 = 0;
+		for(i = 0; i <1000; i++);
+		led5 = 1;
+	} 
     // clear interrupt flag
     RI = 0;
   } // if

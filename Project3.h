@@ -3,8 +3,9 @@
 #include <reg932.h>
 #include "uart.h"
 #include "frequency.h"
-Note * xdata songs[2]; 	// Pre-recorded songs to be played back
-short lengths[2]; 			// Number of notes in each pre-recorded song
+//#include "jacques.h"
+Note * xdata songs[5]; 	// Pre-recorded songs to be played back
+short lengths[5]; 			// Number of notes in each pre-recorded song
 Note * note_ptr; 				// Current note being played back
 short current_song; 		// Current song being played back
 short tempo;    				// Milliseconds per sixteenth note
@@ -22,6 +23,11 @@ NoteName octave_keys[5][7] = { {C1, D1, E1, F01, G1, A1, B1},
 															 {C5, D5, E5, F5, G5, A5, B5}};
 char noteDisplays[7] = {'C', 'D', 'E', 'F', 'G', 'A', 'B' };
 char numDisplays[5] = {'1', '2', '3', '4', '5'};
+
+
+	Note xdata song3[8];	  //C Scale
+	Note xdata song4[8];	  //D Scale
+	Note xdata song5[8];	  //G Scale
 
 sbit sw1 = P2^0;
 sbit sw2 = P0^1;
@@ -75,12 +81,7 @@ void display(char letter);
  *
  */
 void songMode();
-/*
- * Transmits a string over the serial port
- * pre: st - character array to be transmitted
- * post: Sends string to serial port
-  */
-void transmit(char * st);
+
 
 void keyboardMode();
 
@@ -89,5 +90,14 @@ void keyBind();
 NoteName noteSelect();
 
 char get_octave();
+
+void recordMode();
+
+/*
+ * Transmits a string over the serial port
+ * pre: st - character array to be transmitted
+ * post: Sends string to serial port
+  */
+void transmit(char * st);
 
 #endif

@@ -2,9 +2,10 @@
 void main(void)
 {
 		 
-	Note xdata song1[15];
-	Note xdata song2[34];
-	
+	Note xdata song1[15];	  //Another One Bites the Dust
+	Note xdata song2[34];	  //Jeopardy
+
+
 	uart_init();
 
 	
@@ -64,7 +65,7 @@ void main(void)
 	
 	keyboard_mode = 0;
 	
-	// Another one bites the dust
+/*	// Another one bites the dust
 	song1[0].name = A3;
 	song1[0].value = Sixteenth;
 	song1[0].letter = 'A';
@@ -109,7 +110,7 @@ void main(void)
 	song1[13].letter = 'A';
 	song1[14].name = Z;
 	song1[14].value = Half;
-	song1[14].letter = 'Z';
+	song1[14].letter = 'Z';	   */
 	
 	songs[0] = song1;
 	lengths[0] = 15;
@@ -220,7 +221,7 @@ void main(void)
 	lengths[1] = 34;
 	
 	TMOD = 0x11;  //Timer 0 Mode 1
-  IEN0 = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
+	IEN0 = 0x9A;    //Enbles Serial, Timer 0 and timer 1 Interrupts	
 	PCON = 0x00;  //Set SMOD1 = 0, SMOD0 = 0;
 	SCON = 0x50;  //REN = 1, Serial Mode 8-bit Variable UART
 	PT1	 = 1;
@@ -230,7 +231,7 @@ void main(void)
 	P1M1 = 0;
 	P2M1 = 0;
 		
-  transmit("iTunes 8051!\n\r");
+	transmit("iTunes 8051!\n\r");
 	while(1) 
 	{
 		led1 = 0;
@@ -244,24 +245,15 @@ void main(void)
 		}
 		else if (sw2 == 0)
 		{
-			keyboardMode();
+			//keyboardMode();
 		}
 		else if (sw3 == 0);
 		else if (sw4 == 0)
 		{
+			while(sw4 == 0);
 			keyboardMode();
 		}
-		else if (sw7 == 0)
-		{
-			//recordMode();
-			display('A');
-			while(sw3 == 0);
-		}
-		else if (sw4 == 0)
-		{
-			//play_song(0);
-			while(sw4 == 0);
-		}
+
 		else if (sw5 == 0)
 		{
 			//play_song(0);
@@ -274,7 +266,9 @@ void main(void)
 		}
 		else if (sw7 == 0)
 		{
-			//play_song(0);
+			recordMode();
+		//	display('A');
+			while(sw7 == 0);
 		}
 		else if (sw8 == 0)
 		{
@@ -292,7 +286,7 @@ void play_song(int index)
 	current_song = index;
 	song_pos = 0;
 	TF1 = 1;
-}
+}	
 
 void T1_ISR(void) interrupt 3
 {
@@ -333,11 +327,17 @@ void songMode()
 {
 	char songTitle1[] = "Another One Bites The Dust\n\r";
 	char songTitle2[] = "Final Jeopardy Theme\n\r";
-	
+	led4 = led7 =1;
+
 	transmit("Song Mode Activated\n\r");
 	while(1){
+		led2 = led3 = 0;
 		if(sw1 == 0)
+		{
+			while(!sw1);
+			led2 =led3=1;
 			return;
+		}
 		else if(sw2 == 0){
 			transmit(songTitle1);
 			play_song(0);			
@@ -350,16 +350,6 @@ void songMode()
 			while(sw3 == 0);
 		}
   }
-}
-
-void transmit(char * st)
-{
-	short x = 0;
-	while (st[x] != '\0') // Keep sending characters until we hit null terminator
-	{
-		uart_transmit(st[x]);
-		x++;	
-	}
 }
 
 void change_tempo(void)
@@ -533,6 +523,8 @@ void keyboardMode()
 	led2 = led4 = 1;					
 	keyboard_mode = 1;
 
+	transmit("Keyboard Mode\n\r");
+
   	while(1)
 	{
 	    led7 = led8 = led9 = led3 = 0;
@@ -673,3 +665,113 @@ char get_octave()
 	}
 	
 }
+
+void recordMode()
+{
+	char input = 0;	
+	led2 = led3 = led4 = led5 = led6 = led8 = led9 =1;
+	transmit("Choose a key (C, D or G): ");
+	while(1)
+	{
+		
+		if(sw1 == 3)
+		{
+			while(sw1 == 0);
+			return;
+		}
+		
+		//if char == C    
+		//play c scale
+		input = uart_get();
+		if(input == 'c')
+		{
+			song3[0].name = C3;
+			song3[0].value = Quarter;
+			//song3[0].letter = 
+			song3[1].name = D3;
+			song3[1].value = Quarter;
+			//song3[1].letter =
+			song3[2].name = E3;
+			song3[2].value = Quarter;
+			//song3[2].letter =
+			song3[3].name = F3;
+			song3[3].value = Quarter;
+			//song3[3].letter =
+			song3[4].name = G3;
+			song3[4].value = Quarter;
+			//song3[4].letter =
+			song3[5].name = A3;
+			song3[5].value = Quarter;
+			//song3[5].letter =
+			song3[6].name = B3;
+			song3[6].value = Quarter;
+			//song3[6].letter =
+			song3[7].name = C4;
+			song3[7].value = Quarter;
+			//song3[7].letter =
+			songs[2] = song3;
+			lengths[2] = 8;
+		
+		}
+		else if(input == 'd')
+		{
+			song4[0].name = D3; 
+			song4[0].value = Quarter;
+			//song4[0].letter =
+			song4[1].name = E3;
+			song4[1].value = Quarter;
+			//song4[1].letter =
+			song4[2].name = Gb3;
+			song4[2].value = Quarter;
+			//song4[2].letter =
+			song4[3].name = G3;
+			song4[3].value = Quarter;
+			//song4[3].letter =
+			song4[4].name = A3;
+			song4[4].value = Quarter;
+			//song4[4].letter =
+			song4[5].name = B3;
+			song4[5].value = Quarter;
+			//song4[5].letter =
+			song4[6].name = Db4;
+			song4[6].value = Quarter;
+			//song4[6].letter =
+			song4[7].name = D4;
+			song4[7].value = Quarter;
+			//song4[7].letter =
+			songs[3] = song4;
+			lengths[3] = 8;
+		}
+		else if(input == 'g')
+		{
+			song5[0].name = G3;
+			song5[0].value = Quarter;
+		//	song5[0].letter =
+			song5[1].name = A3;
+			song5[1].value = Quarter;
+		//	song5[1].letter =
+			song5[2].name = B3;
+			song5[2].value = Quarter;
+		//	song5[2].letter =
+			song5[3].name = C4;
+			song5[3].value = Quarter;
+		//	song5[3].letter =
+			song5[4].name = D4;
+			song5[4].value = Quarter;
+		//	song5[4].letter =
+			song5[5].name = E4;
+			song5[5].value = Quarter;
+		//	song5[5].letter =
+			song5[6].name = Gb4;
+			song5[6].value = Quarter;
+		//	song5[6].letter =
+			song5[7].name = G4;
+			song5[7].value = Quarter;
+		//	song5[7].letter =
+			songs[4] = song5;
+			lengths[4] = 8;
+		}
+	}
+
+}
+
