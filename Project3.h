@@ -19,7 +19,8 @@ NoteName octave_keys[5][7] = { {C1, D1, E1, F01, G1, A1, B1},
 															 {C3, D3, E3, F3, G3, A3, B3},
 															 {C4, D4, E4, F4, G4, A4, B4},
 															 {C5, D5, E5, F5, G5, A5, B5}};
-char noteDisplays[7] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+char noteDisplays[7] = {'C', 'D', 'E', 'F', 'G', 'A', 'B' };
+char numDisplays[5] = {'1', '2', '3', '4', '5'};
 															 
 
 sbit sw1 = P2^0;

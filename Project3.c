@@ -189,6 +189,7 @@ void main(void)
 		
 		if (sw1 == 0)
 		{
+			while(sw1 == 0);
 			songMode();
 		}
 		else if (sw4 == 0)
@@ -361,7 +362,7 @@ void display(char letter)
 			segF = 0;
 			segG = 1;
 			break;
-		case 1:
+		case '1':
 			segA = 1;
 			segB = 0;
 			segC = 0;
@@ -370,7 +371,7 @@ void display(char letter)
 			segF = 1;
 			segG = 1;
 			break;
-		case 2:
+		case '2':
 			segA = 0;
 			segB = 0;
 			segC = 1;
@@ -379,7 +380,7 @@ void display(char letter)
 			segF = 1;
 			segG = 0;
 			break;
-		case 3:
+		case '3':
 			segA = 0;
 			segB = 0;
 			segC = 0;
@@ -388,7 +389,7 @@ void display(char letter)
 			segF = 1;
 			segG = 0;
 			break;
-	  case 4:
+	  case '4':
 			segA = 1;
 			segB = 0;
 			segC = 0;
@@ -397,7 +398,7 @@ void display(char letter)
 			segF = 0;
 			segG = 0;
 			break;
-		case 5:
+		case '5':
 			segA = 0;
 			segB = 1;
 			segC = 0;
@@ -423,18 +424,22 @@ void songMode()
 	char k = 0;
 	led2 = 0;
 	led3 = 0;
-	led4 = 1;
-	led7 = 1;
 
-	while(1){
+
+	while(1)
+	{
+		led4 = 1;
+		led7 = 1;
 		if(sw1 == 0){
+			while(sw1 == 0);
+			led2 = led3 = 1;
 			return;
 		}
 		else if(sw2 == 0){
 			play_song(0);
-	    while(sw2 == 0);
+	    	while(sw2 == 0);
 		}
-		else if(sw3 = 0){
+		else if(sw3 == 0){
 			play_song(1);
 			while(sw3 == 0);
 		}
@@ -443,52 +448,70 @@ void songMode()
 
 void keyboardMode()
 {
-	led2 = 1;
-	led4 = led5 = led6 = 0;
+	led2 = led4 = 1;					
 	keyboard_mode = 1;
-  while(1)
+
+  	while(1)
 	{
-		if(sw1 == 0){
+	    led7 = led8 = led9 = led3 = 0;
+
+		if(!sw1){	
+   			while(!sw1);
+			led7 = led8 = led9 = led3 = 1;
+			keyboard_mode = 0;	
 			return;
-		  keyboard_mode = 0;
 		}	
-		else if(sw3 == 0){
-      keybind();	
+		else if(!sw3){
+		    while(!sw3);
+      		keybind();	
 		}
 		
-		else if(sw7 == 0){
+		else if(!sw7){
 		 key_note = keys[0];
 		 TF0 = 1;
-		 while(sw7 == 0);
-	  }
-		else if(sw8 == 0){
-		  key_note = keys[1];
-			TF0 = 1;
-			while(sw8 == 0);
+		 while(!sw7);          //Play until released
+		 TR0 = 0;			  //Turn off timer
+	    }	
+	    else if(!sw8){
+			  key_note = keys[1];
+			  TF0 = 1;
+			  while(!sw8);          //Play until released
+			  TR0 = 0;
 		}
 		else if(sw9 == 0){
 			key_note = keys[2];
-			TF0 = 1;
-			while(sw9 == 0);
+		    TF0 = 1;
+			while(!sw9);          //Play until released
+		    TR0 = 0;
 		}
-		
 	}
 }
 
 void keyBind()
 {	
-	//Select Which Key to bind to. 
-	if(sw1 == 0)
-		return;
-	else if(sw7 == 0){
-	  keys[0] = noteSelect();	
+    while(1)
+	{
+		led3 = 1;
+		led7 = led8 = led9 = 0;
+		//Select Which Key to bind to. 
+		if(sw1 == 0)
+		{
+			while(sw1 == 0);
+			return;
+		}
+		else if(sw7 == 0){
+	  		while(!sw7);
+	  		keys[0] = noteSelect();	
+		}
+		else if(sw8 == 0){
+	    	while(!sw8);
+			keys[1] = noteSelect();
+		}
+  		else if(sw9 == 0){
+       		while(!sw9);
+			keys[2] = noteSelect();
+		}
 	}
-	else if(sw8 == 0){
-		keys[1] = noteSelect();
-	}
-  else if(sw9 == 0){
-		keys[2] = noteSelect();
-	}		
 	
 }
 
@@ -506,19 +529,26 @@ NoteName noteSelect()
 	while(1){
 		led3 = led6 = 0;
 		if(sw1 == 0){
+			while(sw1 == 0);
 			octave = get_octave();
 			temp = octave_keys[octave][i];
+			display('Z');
 			return temp;
 		}
 		else if(sw3 == 0){
-       i++;	
+       		i++;
+			while(!sw3);
 		}
 		else if(sw6 == 0){
-       i--;
+       		i--;
+			while(!sw6);
 		}			
 		
-		if(i > 7 || i < 0)
+		if(i > 6)
 			i = 0;
+		if(i < 0)
+		    i = 6;
+
 		display(noteDisplays[i]);
 	}
 	
@@ -527,21 +557,37 @@ NoteName noteSelect()
 char get_octave()
 {
 	char i = 0;
-	led3 = led6 = 1;
+	char j = 0;
+	char k = 0;
+	display(numDisplays[i]);
+	//led3 = led6 = 1;
 	
 	//Select octave;
 	while(1){
-		led2 = led5 = 0;
+		led3 = led6 = 0;
 		if(sw1 == 0)
+		{
+			while(sw1 == 0);
+			led3 = led6 = 1;
 			return i;
-		else if(sw4 == 0)
+		}
+		else if(sw3 == 0)
+		{
+
+			while(!sw3);
 			i++;
-		else if(sw5 == 0)
+
+		}
+		else if(sw6 == 0)
+		{
+			while(!sw6);
 			i--;
-		
-		if(i > 5 || i < 0)
-			i = 0;
-		display(i);
+		}
+		if(i > 4)
+		  i = 0;
+		if(i < 0)
+		  i = 4;
+		display(numDisplays[i]);
 	}
 	
 }
