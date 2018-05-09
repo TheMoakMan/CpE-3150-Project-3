@@ -1,9 +1,11 @@
 #include "Project3.h"
+#include "jacques.h"
 void main(void)
 {
 		 
 	Note xdata song1[15];
 	Note xdata song2[34];
+	multiplier = 1;
 	
 	uart_init();
 
@@ -321,6 +323,11 @@ void songMode()
 
 			while(sw3 == 0);
 		}
+		else if (sw4 == 0) 
+		{
+			transpose();
+			while(sw4 == 0);
+		}
 		else if(sw6 == 0){
 			change_tempo();
 			while(sw4 == 0);
@@ -362,7 +369,8 @@ void T0_ISR(void) interrupt 1
 	// Make sound if song is playing and we aren't resting or keyboard is engaged
 	if ((current_song < 255 && current_note.name != 0) && !keyboard_mode)
 	{
-		TH0 = current_note.name >> 8;
+		current_note.name =  current_note.name * multiplier;
+		TH0 = (current_note.name) >> 8;
 		TL0 = current_note.name;
 		spkr = ~spkr;
 		TF0 = 0;
