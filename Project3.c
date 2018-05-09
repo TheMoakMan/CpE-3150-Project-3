@@ -242,11 +242,6 @@ void main(void)
 			while(sw1 == 0);
 			songMode();
 		}
-		else if (sw2 == 0)
-		{
-			keyboardMode();
-		}
-		else if (sw3 == 0);
 		else if (sw4 == 0)
 		{
 			keyboardMode();
@@ -256,33 +251,6 @@ void main(void)
 			//recordMode();
 			display('A');
 			while(sw3 == 0);
-		}
-		else if (sw4 == 0)
-		{
-			//play_song(0);
-			while(sw4 == 0);
-		}
-		else if (sw5 == 0)
-		{
-			//play_song(0);
-			while(sw5 == 0);
-		}
-		else if (sw6 == 0)
-		{
-			//play_song(0);
-			while(sw6 == 0);
-		}
-		else if (sw7 == 0)
-		{
-			//play_song(0);
-		}
-		else if (sw8 == 0)
-		{
-			//play_song(0);
-		}
-		else if (sw9 == 0)
-		{
-			//play_song(0);
 		}
   }
 }
@@ -330,14 +298,19 @@ void T1_ISR(void) interrupt 3
 }
 
 void songMode()
-{
+{		    
 	char songTitle1[] = "Another One Bites The Dust\n\r";
 	char songTitle2[] = "Final Jeopardy Theme\n\r";
-	
+    
+    led4 = led7 = 1;
 	transmit("Song Mode Activated\n\r");
 	while(1){
-		if(sw1 == 0)
+        led2 = led3 = 0;
+		if(sw1 == 0){
+		    led2 = led3 = 1;
+			while(sw1 == 0);
 			return;
+		}
 		else if(sw2 == 0){
 			transmit(songTitle1);
 			play_song(0);			
