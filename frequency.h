@@ -65,6 +65,7 @@ typedef enum
 	Gb5 =  	-2490,
 	G5 	=  	-2351,
 	A5 	=		-2094,
+	B5  =   -1866,
 	Z = 0 					// Rest
 } NoteName;
 
