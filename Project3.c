@@ -1,8 +1,7 @@
 #include "Project3.h"	    
 
 void main(void)
-{
-		 
+{		 
 	Note xdata song1[15];
 	Note xdata song2[34];
 
@@ -196,6 +195,7 @@ void main(void)
 		}
 		else if (sw4 == 0)
 		{
+		    while(sw4 == 0);
 			keyboardMode();
 		}
 		else if (sw7 == 0)
@@ -604,26 +604,26 @@ void recordMode()
 {
 	led4 = led7 =1;
 	REN = 1;
-	transmit("Enter a song in the format of <Note> <Octave> <Tempo> as integers\n\r");
-	transmit("Note Map: 1=C, 2=D, 3=E, 4=F, 5=G, 6=A, 7=B\n\r");  
-	transmit("Octaves are 1-5\n\rTempos: 1=Whole, 4=Quarter, 8=Eighth\n\r");
-    
-	while(1){
-	  led3 = 0;
-	  if(sw1 == 0){
-        while(sw1 ==0);
-	    REN = 0;
-		led3 = 1;
-	    return;
-	  }
-      if(sw3 == 0){
-        play_song(2);
-		transmit("Custom song\n\r");
-		while(sw3 == 0);
-	  }
+	transmit("Choose a key (C, D or G): ");
+	while(1)
+	{
+	  led3 = 0;	
+		if(sw1 == 0)
+		{
+			while(sw1 == 0);
+			led3 = 1;
+			REN = 0;
+			return;
+		}
+        if(sw3 == 0)
+		{
+           while(sw3 == 0);
+		   transmit("Scale");
+		   play_song(2);
+		}
 
 	}
-	
+	     
 }
 
 

@@ -21,10 +21,10 @@ GENERATED: On "Jun 24 2003" at "10:17:56" by Code Architect 2.01
 extern short * lengths;
 extern NoteName ** octave_keys;
 extern Note * song3;
+extern Note ** songs;
 // flag that indicates if the UART is busy transmitting or not
 static bit mtxbusy;
-extern void transmit(char * st);
-
+extern void transmit(char * st);  
 
 /***********************************************************************
 DESC:    Initializes UART for mode 1
@@ -94,9 +94,8 @@ void uart_isr
 {
   if (RI)
   {
-		unsigned char input = uart_get();
-		//transmit(&input);
-       // Parse(input);
+		unsigned char input = uart_get();		
+        Parse(input);
         
 
    // clear interrupt flag
@@ -143,35 +142,99 @@ unsigned char uart_get
   return SBUF;
 } // uart_get
 
-
 void Parse(char my_input)
 {
-  static char called = 0;
-  static char n_name, n_oct, n_rhyth;
-
-  if(lengths[2] == (25)){
-    transmit("Maximum Song Size Reached");
-    return;
-  }
-  
-  if(called == 0 && my_input >=  '1' && my_input <= '7'){
-    n_name = my_input - '0';
-	called++;
-  } 
-  else if(called == 1 && my_input >= '1' && my_input <= '5'){
-    n_oct = my_input - '0';
-	called++;
-  }
-  else if(called ==  2 && (my_input == '0'  || my_input == '4' || my_input == '8')){
-    n_rhyth = my_input - '0';
-	if(lengths[2] == 1)
-	  transmit("H");
-    
-	//Build a note from the inputs
-	lengths[2]++;
-    song3[lengths[2]-1].name = octave_keys[n_oct-1][n_name-1];
-	song3[lengths[2]-1].value = n_rhyth; 
-
-	called = 0;
-  }
+  	if(my_input == 'C')
+		{
+			song3[0].name = C3;
+			song3[0].value = Quarter;
+			//song3[0].letter = 
+			song3[1].name = D3;
+			song3[1].value = Quarter;
+			//song3[1].letter =
+			song3[2].name = E3;
+			song3[2].value = Quarter;
+			//song3[2].letter =
+			song3[3].name = F3;
+			song3[3].value = Quarter;
+			//song3[3].letter =
+			song3[4].name = G3;
+			song3[4].value = Quarter;
+			//song3[4].letter =
+			song3[5].name = A3;
+			song3[5].value = Quarter;
+			//song3[5].letter =
+			song3[6].name = B3;
+			song3[6].value = Quarter;
+			//song3[6].letter =
+			song3[7].name = C4;
+			song3[7].value = Quarter;
+			//song3[7].letter =
+			songs[2] = song3;
+			lengths[2] = 8;
+		
+		}
+		else if(my_input == 'D')
+		{
+			song3[0].name = D3; 
+			song3[0].value = Quarter;
+			//song4[0].letter =
+			song3[1].name = E3;
+			song3[1].value = Quarter;
+			//song4[1].letter =
+			song3[2].name = Gb3;
+			song3[2].value = Quarter;
+			//song4[2].letter =
+			song3[3].name = G3;
+			song3[3].value = Quarter;
+			//song4[3].letter =
+			song3[4].name = A3;
+			song3[4].value = Quarter;
+			//song4[4].letter =
+			song3[5].name = B3;
+			song3[5].value = Quarter;
+			//song4[5].letter =
+			song3[6].name = Db4;
+			song3[6].value = Quarter;
+			//song4[6].letter =
+			song3[7].name = D4;
+			song3[7].value = Quarter;
+			//song4[7].letter =
+			songs[2] = song3;
+			lengths[2] = 8;
+		}
+		else if(my_input == 'G')
+		{
+			song3[0].name = G3;
+			song3[0].value = Quarter;
+		//	song3[0].letter =
+			song3[1].name = A3;
+			song3[1].value = Quarter;
+		//	song5[1].letter =
+			song3[2].name = B3;
+			song3[2].value = Quarter;
+		//	song5[2].letter =
+			song3[3].name = C4;
+			song3[3].value = Quarter;
+		//	song5[3].letter =
+			song3[4].name = D4;
+			song3[4].value = Quarter;
+		//	song5[4].letter =
+			song3[5].name = E4;
+			song3[5].value = Quarter;
+		//	song5[5].letter =
+			song3[6].name = Gb4;
+			song3[6].value = Quarter;
+		//	song5[6].letter =
+			song3[7].name = G4;
+			song3[7].value = Quarter;
+		//	song5[7].letter =
+			songs[2] = song3;
+			lengths[2] = 8;
+		}
 }
+
+
+
+
+
