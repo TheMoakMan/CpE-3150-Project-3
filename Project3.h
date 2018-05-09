@@ -90,4 +90,6 @@ NoteName noteSelect();
 
 char get_octave();
 
+void change_tempo(void);
+
 #endif

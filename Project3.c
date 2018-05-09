@@ -7,8 +7,7 @@ void main(void)
 	
 	uart_init();
 
-	
-	
+		
 	keyboard_mode = 0;
 	
 	// Another one bites the dust
@@ -305,7 +304,7 @@ void songMode()
     led4 = led7 = 1;
 	transmit("Song Mode Activated\n\r");
 	while(1){
-        led2 = led3 = 0;
+        led2 = led3 = led6 = 0;
 		if(sw1 == 0){
 		    led2 = led3 = 1;
 			while(sw1 == 0);
@@ -322,6 +321,10 @@ void songMode()
 
 			while(sw3 == 0);
 		}
+		else if(sw6 == 0){
+			change_tempo();
+			while(sw4 == 0);
+		}
   }
 }
 
@@ -336,24 +339,22 @@ void transmit(char * st)
 }
 
 void change_tempo(void)
-{
-	if (tempo == 125)
-	{
-		tempo = tempo / 2;
-		transmit("Tempo is at 120 bpm");
-	}
-	
-	else if (tempo == 62)
-	{
-		tempo = tempo / 2;
-		transmit("Tempo is at 240 bpm");
-	}
-	
-	else 
-	{
-		tempo = 125;
-		transmit("Tempo is reset to 60 bpm");
-	}
+{   
+   if(tempo == 125)
+   {
+     tempo /= 2;
+	 transmit("Tempo is at 120 bpm");
+   }
+   else if(tempo == 62)
+   {
+     tempo /= 2;
+	 transmit("Tempo is at 240 bpm");   
+   }
+   else
+   {
+      tempo = 125;
+      transmit("Tempo is reset to 60 bpm");
+   }
 }
 
 void T0_ISR(void) interrupt 1
